@@ -69,3 +69,19 @@ int MountLargeFs(const char* device, const char* mountpoint, const char* fstype,
 
 	return nmount(iov, iovlen, flags);
 }
+
+int RemountReadWrite(const char* device, const char* dir)
+{
+	MountLargeFs(device, dir, "exfatfs", "511", MNT_UPDATE);
+}
+
+void DisableUpdates()
+{
+	sceKernelUnlink("/update/PS4UPDATE.PUP.net.temp");
+	sceKernelRmdir("/update/PS4UPDATE.PUP.net.temp");
+	sceKernelMkdir("/update/PS4UPDATE.PUP.net.temp", 777);
+
+	sceKernelUnlink("/update/PS4UPDATE.PUP");
+	sceKernelRmdir("/update/PS4UPDATE.PUP");
+	sceKernelMkdir("/update/PS4UPDATE.PUP", 777);
+}
