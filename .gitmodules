@@ -1,3 +1,9 @@
 [submodule "External/StubMaker"]
 	path = External/StubMaker
 	url = https://github.com/OSM-Made/StubMaker
+[submodule "External/GoldHenSdk"]
+	path = External/GoldHenSdk
+	url = https://github.com/GoldHEN/GoldHEN_Plugins_SDK
+[submodule "External/libFusionDriver"]
+	path = External/libFusionDriver
+	url = https://github.com/AetherPS/libFusionDriver

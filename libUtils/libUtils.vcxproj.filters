@@ -68,6 +68,12 @@
     <ClInclude Include="Syscall.h">
       <Filter>Header Files\Misc</Filter>
     </ClInclude>
+    <ClInclude Include="PTraceDefs.h">
+      <Filter>Header Files\Debugging</Filter>
+    </ClInclude>
+    <ClInclude Include="SignalDefs.h">
+      <Filter>Header Files\Debugging</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -100,5 +106,8 @@
     <ClCompile Include="FileUtils.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35825.156 d17.13
+VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libUtils", "libUtils\libUtils.vcxproj", "{0ABF04E1-2202-4A99-805F-484AF8D35D4F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib7z", "lib7z\lib7z.vcxproj", "{1D9FC609-3BDC-4E93-B14A-13262BADE7C7}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSysInt", "libSysInt\libSysInt.vcxproj", "{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{0ABF04E1-2202-4A99-805F-484AF8D35D4F}.Debug|ORBIS.Build.0 = Debug|ORBIS
 		{0ABF04E1-2202-4A99-805F-484AF8D35D4F}.Release|ORBIS.ActiveCfg = Release|ORBIS
 		{0ABF04E1-2202-4A99-805F-484AF8D35D4F}.Release|ORBIS.Build.0 = Release|ORBIS
+		{1D9FC609-3BDC-4E93-B14A-13262BADE7C7}.Debug|ORBIS.ActiveCfg = Debug|ORBIS
+		{1D9FC609-3BDC-4E93-B14A-13262BADE7C7}.Debug|ORBIS.Build.0 = Debug|ORBIS
+		{1D9FC609-3BDC-4E93-B14A-13262BADE7C7}.Release|ORBIS.ActiveCfg = Release|ORBIS
+		{1D9FC609-3BDC-4E93-B14A-13262BADE7C7}.Release|ORBIS.Build.0 = Release|ORBIS
+		{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}.Debug|ORBIS.ActiveCfg = Debug|ORBIS
+		{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}.Debug|ORBIS.Build.0 = Debug|ORBIS
+		{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}.Release|ORBIS.ActiveCfg = Release|ORBIS
+		{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}.Release|ORBIS.Build.0 = Release|ORBIS
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
