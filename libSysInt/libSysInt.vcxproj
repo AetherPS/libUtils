@@ -81,7 +81,7 @@
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <OptimizationLevel>Level2</OptimizationLevel>
-      <AdditionalIncludeDirectories>$(SolutionDir)External/GoldHenSdk/include;$(SolutionDir)External\libFusionDriver\libFusionDriver;$(SolutionDir)External\libFusionDriver\External\FusionShared;$(SolutionDir)External\StubMaker\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\GoldHenSdk\include;$(SolutionDir)External\libFusionDriver\libFusionDriver;$(SolutionDir)External\libFusionDriver\External\FusionShared;$(SolutionDir)External\StubMaker\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <Import Condition="'$(ConfigurationType)' == 'Makefile' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets')" Project="$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets" />
