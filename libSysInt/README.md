@@ -1,6 +1,6 @@
 ﻿# libSysInt - System Interface Library
 
-A C++ library for system integration functionality, targeting C++14 standard. This library provides a unified interface for system-level operations, with support for both Fusion Driver and GoldHEN backends.
+This library provides a unified interface for system-level operations, with support for both Fusion Driver and GoldHEN backends.
 
 ## Requirements
 
@@ -70,7 +70,3 @@ All functions provide boolean or integer return values to indicate success or fa
 ## Thread Safety
 
 The library maintains internal state for jailbreak backups. Care should be taken when using these functions across multiple threads.
-
-## License
-
-TODO: Add license information here.

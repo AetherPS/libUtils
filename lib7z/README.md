@@ -1,4 +1,4 @@
-﻿# lib7z
+﻿# lib7z - 7-zip Archive Extraction Library
 
 lib7z is a C++ library for working with 7z (7-Zip) archive files. It provides functionality to extract 7z archives based on the [LZMA SDK](https://www.7-zip.org/sdk.html).
 
