@@ -5,6 +5,8 @@
 #include <KernelExt.h>
 #include <ShellCode.h>
 
+#include "SystemInterface.h"
+
 // Jailbackups
 JailBackup FusionBackup;
 bool FusionBackupUsed;

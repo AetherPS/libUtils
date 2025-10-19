@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lib7z", "lib7z\lib7z.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSysInt", "libSysInt\libSysInt.vcxproj", "{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libAppCtrl", "libAppCtrl\libAppCtrl.vcxproj", "{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ORBIS = Debug|ORBIS
@@ -27,6 +29,10 @@ Global
 		{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}.Debug|ORBIS.Build.0 = Debug|ORBIS
 		{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}.Release|ORBIS.ActiveCfg = Release|ORBIS
 		{3D373CD6-7CA2-4DD2-AA5D-1A43646B495A}.Release|ORBIS.Build.0 = Release|ORBIS
+		{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}.Debug|ORBIS.ActiveCfg = Debug|ORBIS
+		{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}.Debug|ORBIS.Build.0 = Debug|ORBIS
+		{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}.Release|ORBIS.ActiveCfg = Release|ORBIS
+		{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}.Release|ORBIS.Build.0 = Release|ORBIS
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

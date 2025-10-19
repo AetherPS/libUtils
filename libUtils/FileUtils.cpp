@@ -72,7 +72,7 @@ int MountLargeFs(const char* device, const char* mountpoint, const char* fstype,
 
 int RemountReadWrite(const char* device, const char* dir)
 {
-	MountLargeFs(device, dir, "exfatfs", "511", MNT_UPDATE);
+	return MountLargeFs(device, dir, "exfatfs", "511", MNT_UPDATE);
 }
 
 void DisableUpdates()
