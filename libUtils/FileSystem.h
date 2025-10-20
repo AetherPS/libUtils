@@ -12,8 +12,8 @@ public:
 	static bool MakeDir(const char* Dir, ...);
 	static void CopyFile(const char* File, const char* Destination);
 
-	static bool Read(const std::string& filePath, void* data, size_t length);
-	static bool Write(const std::string& filePath, const void* data, size_t length);
+	static int Read(const std::string& filePath, void* data, size_t length);
+	static int Write(const std::string& filePath, const void* data, size_t length);
 
 private:
 

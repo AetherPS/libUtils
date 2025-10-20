@@ -166,7 +166,6 @@ bool FileSystem::MakeDir(const char* Dir, ...)
 		return false;
 	}
 
-	Logger::Info("%s: Successfully created directory: %s\n", __FUNCTION__, buffer);
 	return true;
 }
 
@@ -259,16 +258,13 @@ void FileSystem::CopyFile(const char* File, const char* Destination)
 		totalWritten += w;
 	}
 
-	Logger::Info("%s Successfully copied %s -> %s (%lld bytes)\n",
-		__FUNCTION__, File, Destination, (long long)Stats.st_size);
-
 	free(FileData);
 	sceKernelClose(src);
 	sceKernelClose(dst);
 }
 
 
-bool FileSystem::Read(const std::string& filePath, void* data, size_t length)
+int FileSystem::Read(const std::string& filePath, void* data, size_t length)
 {
 	if (!data) return -1;
 
@@ -307,13 +303,10 @@ bool FileSystem::Read(const std::string& filePath, void* data, size_t length)
 		return closeResult;
 	}
 
-	Logger::Info("%s Successfully read %zu bytes from \"%s\"\n",
-		__FUNCTION__, totalRead, filePath.c_str());
-
 	return 0;
 }
 
-bool FileSystem::Write(const std::string& filePath, const void* data, size_t length)
+int FileSystem::Write(const std::string& filePath, const void* data, size_t length)
 {
 	int fd = sceKernelOpen(filePath.c_str(), SCE_KERNEL_O_CREAT | SCE_KERNEL_O_WRONLY | SCE_KERNEL_O_TRUNC, 0777);
 	if (fd < 0)
@@ -344,9 +337,6 @@ bool FileSystem::Write(const std::string& filePath, const void* data, size_t len
 			__FUNCTION__, filePath.c_str(), closeResult, *__error(), sceKernelError(*__error()));
 		return closeResult;
 	}
-
-	Logger::Info("%s Successfully wrote %zu bytes to \"%s\"\n",
-		__FUNCTION__, length, filePath.c_str());
 
 	return 0;
 }
