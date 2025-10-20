@@ -74,6 +74,9 @@
     <ClInclude Include="SignalDefs.h">
       <Filter>Header Files\Debugging</Filter>
     </ClInclude>
+    <ClInclude Include="Notify.h">
+      <Filter>Header Files\Misc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -104,6 +107,9 @@
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
     <ClCompile Include="FileUtils.cpp">
+      <Filter>Source Files\Misc</Filter>
+    </ClCompile>
+    <ClCompile Include="Notify.cpp">
       <Filter>Source Files\Misc</Filter>
     </ClCompile>
   </ItemGroup>

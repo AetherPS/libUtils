@@ -85,6 +85,7 @@
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Logging.h" />
+    <ClInclude Include="Notify.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="PTraceDefs.h" />
     <ClInclude Include="SignalDefs.h" />
@@ -100,6 +101,7 @@
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Logging.cpp" />
+    <ClCompile Include="Notify.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="SocketListener.cpp" />
     <ClCompile Include="Sockets.cpp" />
