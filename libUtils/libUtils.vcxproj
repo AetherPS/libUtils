@@ -89,6 +89,8 @@
     <ClInclude Include="Logging.h" />
     <ClInclude Include="Networking.h" />
     <ClInclude Include="Notify.h" />
+    <ClInclude Include="Patcher.h" />
+    <ClInclude Include="PatchManager.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="PTraceDefs.h" />
     <ClInclude Include="Resolver.h" />
@@ -111,6 +113,8 @@
     <ClCompile Include="Logging.cpp" />
     <ClCompile Include="Networking.cpp" />
     <ClCompile Include="Notify.cpp" />
+    <ClCompile Include="Patcher.cpp" />
+    <ClCompile Include="PatchManager.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Resolver.cpp" />
     <ClCompile Include="SHA256.cpp" />

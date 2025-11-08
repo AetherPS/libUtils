@@ -22,6 +22,7 @@
 #include <fstream>
 #include <user_service.h>
 #include <system_service.h>
+#include <map>
 
 // From StubMaker
 #include <KernelExt.h>

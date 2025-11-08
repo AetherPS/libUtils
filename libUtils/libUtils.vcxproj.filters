@@ -45,6 +45,12 @@
     <Filter Include="Header Files\Crypto">
       <UniqueIdentifier>{a0ed4a35-7ce5-4e36-972d-94624f105709}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Memory\Patcher">
+      <UniqueIdentifier>{8c63ca4f-8d3e-4cc9-a463-f87bf3134793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Memory\Patcher">
+      <UniqueIdentifier>{bf437143-24c4-42fd-9e0f-5beda87ba36b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -110,6 +116,12 @@
     <ClInclude Include="SHA256.h">
       <Filter>Header Files\Crypto</Filter>
     </ClInclude>
+    <ClInclude Include="Patcher.h">
+      <Filter>Header Files\Memory\Patcher</Filter>
+    </ClInclude>
+    <ClInclude Include="PatchManager.h">
+      <Filter>Header Files\Memory\Patcher</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -159,6 +171,12 @@
     </ClCompile>
     <ClCompile Include="SHA256.cpp">
       <Filter>Source Files\Crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="Patcher.cpp">
+      <Filter>Source Files\Memory\Patcher</Filter>
+    </ClCompile>
+    <ClCompile Include="PatchManager.cpp">
+      <Filter>Source Files\Memory\Patcher</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
