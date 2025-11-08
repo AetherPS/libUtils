@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{1d9fc609-3bdc-4e93-b14a-13262bade7c7}</ProjectGuid>
+    <ProjectGuid>{c7ce7c1c-3599-4597-9d7b-2ad66ce83df8}</ProjectGuid>
     <OrbisSdkVersion>9.000</OrbisSdkVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -46,20 +46,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ORBIS'">
-    <OutDir>$(SolutionDir)Build\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ORBIS'">
-    <OutDir>$(SolutionDir)Build\</OutDir>
-    <IntDir>$(Configuration)\</IntDir>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ORBIS'">
     <ClCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <CppExceptions>true</CppExceptions>
-      <CppLanguageStd>Cpp17</CppLanguageStd>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <Addressing>NonAslr</Addressing>
@@ -69,59 +61,33 @@
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <OptimizationLevel>Level2</OptimizationLevel>
-      <CppExceptions>true</CppExceptions>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\StubMaker\include;$(SolutionDir)libUtils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStd>Cpp17</CppLanguageStd>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="7z.h" />
-    <ClInclude Include="7zAlloc.h" />
-    <ClInclude Include="7zBuf.h" />
-    <ClInclude Include="7zCrc.h" />
-    <ClInclude Include="7zExtractor.h" />
-    <ClInclude Include="7zFile.h" />
-    <ClInclude Include="7zFunctions.h" />
-    <ClInclude Include="7zTypes.h" />
-    <ClInclude Include="7zVersion.h" />
-    <ClInclude Include="Bcj2.h" />
-    <ClInclude Include="Bra.h" />
-    <ClInclude Include="Compiler.h" />
-    <ClInclude Include="CpuArch.h" />
-    <ClInclude Include="Delta.h" />
-    <ClInclude Include="Lzma2Dec.h" />
-    <ClInclude Include="LzmaDec.h" />
-    <ClInclude Include="Ppmd.h" />
-    <ClInclude Include="Ppmd7.h" />
-    <ClInclude Include="Precomp.h" />
+    <ClInclude Include="BaseDetour.h" />
+    <ClInclude Include="Detour.h" />
+    <ClInclude Include="Detour32.h" />
+    <ClInclude Include="Detour64.h" />
+    <ClInclude Include="DetourCall.h" />
+    <ClInclude Include="DetourManager.h" />
+    <ClInclude Include="hde64.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="table64.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="7zAlloc.c" />
-    <ClCompile Include="7zArcIn.c" />
-    <ClCompile Include="7zBuf.c" />
-    <ClCompile Include="7zBuf2.c" />
-    <ClCompile Include="7zCrc.c" />
-    <ClCompile Include="7zCrcOpt.c" />
-    <ClCompile Include="7zDec.c" />
-    <ClCompile Include="7zExtractor.cpp" />
-    <ClCompile Include="7zFile.c" />
-    <ClCompile Include="7zFunctions.c" />
-    <ClCompile Include="7zStream.c" />
-    <ClCompile Include="Bcj2.c" />
-    <ClCompile Include="Bra.c" />
-    <ClCompile Include="Bra86.c" />
-    <ClCompile Include="BraIA64.c" />
-    <ClCompile Include="CpuArch.c" />
-    <ClCompile Include="Delta.c" />
-    <ClCompile Include="Lzma2Dec.c" />
-    <ClCompile Include="LzmaDec.c" />
-    <ClCompile Include="Ppmd7.c" />
-    <ClCompile Include="Ppmd7Dec.c" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md">
-      <SubType>
-      </SubType>
-    </None>
+    <ClCompile Include="BaseDetour.cpp" />
+    <ClCompile Include="Detour32.cpp" />
+    <ClCompile Include="Detour64.cpp" />
+    <ClCompile Include="DetourCall.cpp" />
+    <ClCompile Include="DetourManager.cpp" />
+    <ClCompile Include="hde64.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ORBIS'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ORBIS'">Create</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Condition="'$(ConfigurationType)' == 'Makefile' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets')" Project="$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

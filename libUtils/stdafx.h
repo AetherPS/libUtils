@@ -20,9 +20,14 @@
 #include <libnetctl.h>
 #include <regex>
 #include <fstream>
+#include <user_service.h>
+#include <system_service.h>
 
 // From StubMaker
 #include <KernelExt.h>
+#include <NetExt.h>
+#include <UserServiceExt.h>
+#include <SystemServiceExt.h>
 
 #include "StringExt.h"
 #include "Logging.h"

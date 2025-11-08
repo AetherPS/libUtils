@@ -81,6 +81,58 @@ int GetPidByName(const char* ProcessName)
 	return -1;
 }
 
+int GetPidByAppId(int appId)
+{
+	int pid = 0;
+
+	// Get the list of running processes.
+	std::vector<kinfo_proc> processList;
+	GetProcessList(processList);
+
+	for (const auto& i : processList)
+	{
+		// Get the app info using the pid.
+		SceAppInfo appInfo;
+		sceKernelGetAppInfo(i.ki_pid, &appInfo);
+
+		// Using the titleId match our desired app and return the pid from the kinfo_proc.
+		if (appInfo.AppId == appId)
+		{
+			pid = i.ki_pid;
+
+			break;
+		}
+	}
+
+	return pid;
+}
+
+int GetPidByTitleId(const char* TitleId)
+{
+	int pid = 0;
+
+	// Get the list of running processes.
+	std::vector<kinfo_proc> processList;
+	GetProcessList(processList);
+
+	for (const auto& i : processList)
+	{
+		// Get the app info using the pid.
+		SceAppInfo appInfo;
+		sceKernelGetAppInfo(i.ki_pid, &appInfo);
+
+		// Using the titleId match our desired app and return the pid from the kinfo_proc.
+		if (!strcmp(appInfo.TitleId, TitleId))
+		{
+			pid = i.ki_pid;
+
+			break;
+		}
+	}
+
+	return pid;
+}
+
 std::string GetSandboxPath(int pid)
 {
 	// Easy way to get the titleId.

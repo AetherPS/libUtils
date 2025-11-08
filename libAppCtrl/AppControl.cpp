@@ -1,6 +1,28 @@
 #include "stdafx.h"
 #include "AppControl.h"
 
+void ExitGraceful()
+{
+	SceAppInfo info;
+	sceKernelGetAppInfo(getpid(), &info);
+
+	sceLncUtilKillApp(info.AppId);
+}
+
+std::string GetBigAppTitleId()
+{
+	auto appId = sceSystemServiceGetAppIdOfBigApp();
+
+	if (appId < 0)
+		return "N/A";
+
+	SceAppInfo info;
+	if (sceApplicationGetAppInfoByAppId(appId, &info) != 0)
+		return "N/A";
+
+	return std::string(info.TitleId);
+}
+
 int GetAppIdByTitleId(const char* TitleId)
 {
 	int appId = 0;

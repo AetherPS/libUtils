@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libSysInt", "libSysInt\libS
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libAppCtrl", "libAppCtrl\libAppCtrl.vcxproj", "{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libDetour", "libDetour\libDetour.vcxproj", "{C7CE7C1C-3599-4597-9D7B-2AD66CE83DF8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ORBIS = Debug|ORBIS
@@ -33,6 +35,10 @@ Global
 		{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}.Debug|ORBIS.Build.0 = Debug|ORBIS
 		{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}.Release|ORBIS.ActiveCfg = Release|ORBIS
 		{D9B48B52-B76A-49C6-AD31-4B9A4BABA145}.Release|ORBIS.Build.0 = Release|ORBIS
+		{C7CE7C1C-3599-4597-9D7B-2AD66CE83DF8}.Debug|ORBIS.ActiveCfg = Debug|ORBIS
+		{C7CE7C1C-3599-4597-9D7B-2AD66CE83DF8}.Debug|ORBIS.Build.0 = Debug|ORBIS
+		{C7CE7C1C-3599-4597-9D7B-2AD66CE83DF8}.Release|ORBIS.ActiveCfg = Release|ORBIS
+		{C7CE7C1C-3599-4597-9D7B-2AD66CE83DF8}.Release|ORBIS.Build.0 = Release|ORBIS
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

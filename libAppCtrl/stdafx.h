@@ -1,6 +1,8 @@
 #pragma once
 
 #include <KernelExt.h>
+#include <SystemServiceExt.h>
+#include <SysCoreUtil.h>
 #include <LncUtil.h>
 #include <string.h>
 #include <mutex>

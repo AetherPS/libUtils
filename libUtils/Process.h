@@ -95,5 +95,7 @@ int GetProcessList(std::vector<kinfo_proc>& ProcessList);
 int GetProcInfo(int pid, kinfo_proc* out);
 bool MountProcFs();
 int GetPidByName(const char* ProcessName);
+int GetPidByAppId(int appId);
+int GetPidByTitleId(const char* TitleId);
 std::string GetSandboxPath(int pid);
 std::string GetSandboxRandom(int pid);

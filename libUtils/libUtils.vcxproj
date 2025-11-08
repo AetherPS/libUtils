@@ -12,6 +12,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{0abf04e1-2202-4a99-805f-484af8d35d4f}</ProjectGuid>
+    <OrbisSdkVersion>9.000</OrbisSdkVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ORBIS'" Label="Configuration">
@@ -83,12 +84,15 @@
   <ItemGroup>
     <ClInclude Include="FileSystem.h" />
     <ClInclude Include="FileUtils.h" />
+    <ClInclude Include="Json.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Logging.h" />
+    <ClInclude Include="Networking.h" />
     <ClInclude Include="Notify.h" />
     <ClInclude Include="Process.h" />
     <ClInclude Include="PTraceDefs.h" />
     <ClInclude Include="Resolver.h" />
+    <ClInclude Include="SHA256.h" />
     <ClInclude Include="SignalDefs.h" />
     <ClInclude Include="SocketListener.h" />
     <ClInclude Include="Sockets.h" />
@@ -96,16 +100,20 @@
     <ClInclude Include="StringExt.h" />
     <ClInclude Include="Symbol.h" />
     <ClInclude Include="Syscall.h" />
+    <ClInclude Include="System.h" />
     <ClInclude Include="ThreadPool.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileSystem.cpp" />
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Logging.cpp" />
+    <ClCompile Include="Networking.cpp" />
     <ClCompile Include="Notify.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Resolver.cpp" />
+    <ClCompile Include="SHA256.cpp" />
     <ClCompile Include="SocketListener.cpp" />
     <ClCompile Include="Sockets.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -113,7 +121,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ORBIS'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="StringExt.cpp" />
+    <ClCompile Include="System.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md">
