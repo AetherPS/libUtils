@@ -6,3 +6,4 @@ A collection of utility libraries for PS4 development.
 - **libSysInt**: System Interface Library for jailbreaking or loading PRX.
 - **lib7zip**: 7-Zip archive decompression library.
 - **libAppCtrl**: Utility for managing the state and retrieving metadata of apps by TitleId.
+- **libDetour**: Detouring/Hooking library supporting 64/32 bit hooking and hooking calls with a hook management system.
