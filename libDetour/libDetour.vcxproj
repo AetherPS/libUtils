@@ -55,6 +55,9 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\StubMaker\include;$(SolutionDir)libUtils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CppExceptions>true</CppExceptions>
+      <CppLanguageStd>Cpp17</CppLanguageStd>
     </ClCompile>
     <Link>
       <Addressing>NonAslr</Addressing>
