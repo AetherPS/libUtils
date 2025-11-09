@@ -1,6 +1,17 @@
 # libUtils
 A collection of utility libraries for PS4 development.
 
+# Build Requirements
+- PS4 Official SDK
+
+# Build Steps
+1. Ensure that the PS4 Official SDK is fully installed, including the Visual Studio integration components.
+2. Clone the Repository and its submodules: 
+    ```bash
+    git clone --recurse-submodules https://github.com/AetherPS/libUtils
+    ```
+3. Build the solution using **Visual Studio**.
+
 # Libraries
 - **libUtils**: Utility functions for logging, file system operations, and more.
 - **libSysInt**: System Interface Library for jailbreaking or loading PRX.
