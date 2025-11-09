@@ -101,3 +101,58 @@ std::string GetIdPs()
 	else
 		return "Error";
 }
+
+int ChangeSystemState(NewSystemState state)
+{
+	int ret = 0;
+
+	switch (state)
+	{
+	case Suspend:
+		ret = sceSystemStateMgrEnterStandby();
+		break;
+
+	case Shutdown:
+		ret = sceSystemStateMgrTurnOff();
+		break;
+
+	case Reboot:
+		ret = sceSystemStateMgrReboot();
+		break;
+	}
+
+	return ret;
+}
+
+std::tuple<uint64_t, uint64_t> GetStorageStats()
+{
+	uint64_t FreeSpace, TotalSpace;
+	sceShellCoreUtilGetFreeSizeOfUserPartition(&FreeSpace, &TotalSpace);
+
+	return std::tuple<uint64_t, uint64_t>(FreeSpace, TotalSpace);
+}
+
+void RingBuzzer(BuzzerType Type)
+{
+	if (Type < 6)
+		sceKernelIccSetBuzzer(Type);
+}
+
+void SetConsoleLED(ConsoleLEDColours Colour)
+{
+	switch (Colour)
+	{
+	default:
+	case white:
+		sceKernelIccIndicatorBootDone();
+		break;
+
+	case whiteBlinking:
+		sceKernelIccIndicatorShutdown();
+		break;
+
+	case BlueBlinking:
+		sceKernelIccIndicatorStandbyBoot();
+		break;
+	}
+}

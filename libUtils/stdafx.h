@@ -29,6 +29,8 @@
 #include <NetExt.h>
 #include <UserServiceExt.h>
 #include <SystemServiceExt.h>
+#include <SystemStateMgr.h>
+#include <ShellCoreUtil.h>
 
 #include "StringExt.h"
 #include "Logging.h"
