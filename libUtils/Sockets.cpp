@@ -75,33 +75,43 @@ SceNetId Sockets::Connect(const char* address, uint16_t port, int timeOutSeconds
 	return Connect(s_addr, port, timeOutSeconds);
 }
 
+bool Sockets::SendByte(SceNetId sock, uint8_t val)
+{
+	auto res = sceNetSend(sock, &val, 1, 0);
+	return res == sizeof(uint8_t);
+}
+
+bool Sockets::RecvByte(SceNetId sock, uint8_t* val)
+{
+	auto res = sceNetRecv(sock, val, 1, 0);
+	return res == sizeof(uint8_t);
+}
+
+bool Sockets::SendUInt32(SceNetId sock, uint32_t val)
+{
+	auto res = sceNetSend(sock, &val, sizeof(uint32_t), 0);
+	return res == sizeof(uint32_t);
+}
+
+bool Sockets::RecvUInt32(SceNetId sock, uint32_t* val)
+{
+	auto res = sceNetRecv(sock, val, sizeof(uint32_t), 0);
+	return res == sizeof(uint32_t);
+}
+
 bool Sockets::SendInt(SceNetId Sock, int val)
 {
 	auto res = sceNetSend(Sock, &val, sizeof(int), 0);
-	if (res <= 0)
-	{
-		Logger::Error("%s: Failed to send %llX\n", __FUNCTION__, res);
-
-		return false;
-	}
-
-	return true;
+	return res == sizeof(int);
 }
 
 bool Sockets::RecvInt(SceNetId Sock, int* val)
 {
 	auto res = sceNetRecv(Sock, val, sizeof(int), 0);
-	if (res <= 0)
-	{
-		Logger::Error("%s: Failed to recv %llX\n", __FUNCTION__, res);
-
-		return false;
-	}
-
-	return true;
+	return res == sizeof(int);
 }
 
-bool Sockets::SendLargeData(SceNetId Sock, unsigned char* data, size_t dataLen)
+bool Sockets::SendBytes(SceNetId Sock, unsigned char* data, size_t dataLen)
 {
 	unsigned char* CurrentPosition = data;
 	size_t DataLeft = dataLen;
@@ -125,7 +135,7 @@ bool Sockets::SendLargeData(SceNetId Sock, unsigned char* data, size_t dataLen)
 	return true;
 }
 
-bool Sockets::RecvLargeData(SceNetId Sock, unsigned char* data, size_t dataLen)
+bool Sockets::RecvBytes(SceNetId Sock, unsigned char* data, size_t dataLen)
 {
 	size_t DataLeft = dataLen;
 	int Received = 0;
@@ -146,34 +156,4 @@ bool Sockets::RecvLargeData(SceNetId Sock, unsigned char* data, size_t dataLen)
 	}
 
 	return true;
-}
-
-bool Sockets::SendWithSize(SceNetId sock, unsigned char* data, int len)
-{
-	// Send the size of our packet.
-	if (!SendInt(sock, len))
-		return false;
-
-	// Send the packet data.
-	if (!SendLargeData(sock, data, len))
-		return false;
-
-	return true;
-}
-
-std::vector<uint8_t> Sockets::ReceiveWithSize(SceNetId sock)
-{
-	// Recieve the size of the incoming packet.
-	int len = 0;
-	if (!RecvInt(sock, &len))
-		return std::vector<uint8_t>();
-
-	// Create temporary buffer for data.
-	auto data = std::vector<uint8_t>(len);
-
-	// Recieve the incoming packet.
-	if (!RecvLargeData(sock, data.data(), len))
-		return std::vector<uint8_t>();
-
-	return data;
 }
