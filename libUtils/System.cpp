@@ -3,14 +3,14 @@
 
 int GetSDKVersion(int* sdkVersion)
 {
-	size_t sdkVersionLenght = sizeof(int);
-	return sysctlbyname("kern.sdk_version", (char*)sdkVersion, &sdkVersionLenght, nullptr, 0);
+	size_t sdkVersionLength = sizeof(int);
+	return sysctlbyname("kern.sdk_version", (char*)sdkVersion, &sdkVersionLength, nullptr, 0);
 }
 
 int GetUpdateVersion(int* updateVersion)
 {
-	size_t updateVersionLenght = sizeof(int);
-	return sysctlbyname("machdep.upd_version", (char*)&updateVersion, &updateVersionLenght, nullptr, 0);
+	size_t updateVersionLength = sizeof(int);
+	return sysctlbyname("machdep.upd_version", (char*)&updateVersion, &updateVersionLength, nullptr, 0);
 }
 
 int GetConsoleName(std::string& name)
