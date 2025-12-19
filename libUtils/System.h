@@ -24,15 +24,12 @@ enum NewSystemState
 	Reboot = 3,
 };
 
-int32_t GetCPUTemp();
-int32_t GetSOCTemp();
-int GetSDKVersion();
-int GetUpdateVersion();
-std::string GetConsoleName();
+int GetSDKVersion(int* sdkVersion);
+int GetUpdateVersion(int* updateVersion);
+int GetConsoleName(std::string& name);
 ConsoleTypes GetConsoleType();
-std::string GetPsId();
-std::string GetIdPs();
+int GetPsId(std::vector<uint8_t>& psid);
+int GetIdPs(std::vector<uint8_t>& idps);
 int ChangeSystemState(NewSystemState state);
-std::tuple<uint64_t, uint64_t> GetStorageStats();
 void RingBuzzer(BuzzerType Type);
 void SetConsoleLED(ConsoleLEDColours Colour);

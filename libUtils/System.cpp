@@ -1,51 +1,27 @@
 #include "stdafx.h"
 #include "System.h"
 
-int32_t GetCPUTemp()
+int GetSDKVersion(int* sdkVersion)
 {
-	int32_t CPUTemp = 0;
-	if (sceKernelGetCpuTemperature(&CPUTemp) == 0)
-		return CPUTemp;
-	else
-		return -1;
+	size_t sdkVersionLenght = sizeof(int);
+	return sysctlbyname("kern.sdk_version", (char*)sdkVersion, &sdkVersionLenght, nullptr, 0);
 }
 
-int32_t GetSOCTemp()
+int GetUpdateVersion(int* updateVersion)
 {
-	int32_t SOCTemp = 0;
-	if (sceKernelGetSocSensorTemperature(0, &SOCTemp) == 0)
-		return SOCTemp;
-	else
-		return -1;
+	size_t updateVersionLenght = sizeof(int);
+	return sysctlbyname("machdep.upd_version", (char*)&updateVersion, &updateVersionLenght, nullptr, 0);
 }
 
-int GetSDKVersion()
+int GetConsoleName(std::string& name)
 {
-	int sdk_version = 0;
-	size_t sdk_versionlen = 4;
+	char buf[0x100];
+	int ret = sceSystemServiceParamGetString(SCE_SYSTEM_SERVICE_PARAM_ID_SYSTEM_NAME, buf, sizeof(buf));
 
-	sysctlbyname("kern.sdk_version", (char*)&sdk_version, &sdk_versionlen, nullptr, 0);
+	if (ret == 0)
+		name = buf;
 
-	return sdk_version;
-}
-
-int GetUpdateVersion()
-{
-	int sdk_version = 0;
-	size_t sdk_versionlen = 4;
-
-	sysctlbyname("machdep.upd_version", (char*)&sdk_version, &sdk_versionlen, nullptr, 0);
-
-	return sdk_version;
-}
-
-std::string GetConsoleName()
-{
-	char buffer[0x100];
-	if (sceSystemServiceParamGetString(SCE_SYSTEM_SERVICE_PARAM_ID_SYSTEM_NAME, buffer, sizeof(buffer)) == 0)
-		return buffer;
-	else
-		return "Error";
+	return ret;
 }
 
 ConsoleTypes GetConsoleType()
@@ -80,26 +56,18 @@ ConsoleTypes GetConsoleType()
 	return CT_UNK;
 }
 
-std::string GetPsId()
+int GetPsId(std::vector<uint8_t>& psid)
 {
-	size_t psidlen = 16;
-	std::vector<uint8_t> psidRaw;
-	psidRaw.resize(psidlen);
-	if (sysctlbyname("machdep.openpsid", psidRaw.data(), &psidlen, NULL, 0) == 0)
-		return ByteArrayToHexString(psidRaw);
-	else
-		return "Error";
+	size_t len = 16;
+	psid.resize(len);
+	return sysctlbyname("machdep.openpsid", psid.data(), &len, nullptr, 0);
 }
 
-std::string GetIdPs()
+int GetIdPs(std::vector<uint8_t>& idps)
 {
-	size_t psidlen = 16;
-	std::vector<uint8_t> psidRaw;
-	psidRaw.resize(psidlen);
-	if (sysctlbyname("machdep.idps", psidRaw.data(), &psidlen, NULL, 0) == 0)
-		return ByteArrayToHexString(psidRaw);
-	else
-		return "Error";
+	size_t len = 16;
+	idps.resize(len);
+	return sysctlbyname("machdep.idps", idps.data(), &len, nullptr, 0);
 }
 
 int ChangeSystemState(NewSystemState state)
@@ -124,17 +92,9 @@ int ChangeSystemState(NewSystemState state)
 	return ret;
 }
 
-std::tuple<uint64_t, uint64_t> GetStorageStats()
-{
-	uint64_t FreeSpace, TotalSpace;
-	sceShellCoreUtilGetFreeSizeOfUserPartition(&FreeSpace, &TotalSpace);
-
-	return std::tuple<uint64_t, uint64_t>(FreeSpace, TotalSpace);
-}
-
 void RingBuzzer(BuzzerType Type)
 {
-	if (Type < 6)
+	if (Type < 5)
 		sceKernelIccSetBuzzer(Type);
 }
 
