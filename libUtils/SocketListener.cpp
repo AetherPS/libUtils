@@ -85,12 +85,14 @@ void SocketListener::ListenThread(int protocol, unsigned short port, int timeOut
 				if (!ServerRunning)
 					return;
 
+				int sock_timeout = 1000000 * timeOutSeconds;
+				sceNetSetsockopt(ClientSocket, SCE_NET_SOL_SOCKET, SCE_NET_SO_SNDTIMEO, &sock_timeout, sizeof(sock_timeout));
+				sceNetSetsockopt(ClientSocket, SCE_NET_SOL_SOCKET, SCE_NET_SO_RCVTIMEO, &sock_timeout, sizeof(sock_timeout));
+
 				auto sock = ClientSocket;
 				auto addr = ClientAddr.sin_addr;
 
 				ClientCallBack(ThreadParameter, sock, addr);
-
-				sceNetSocketClose(sock);
 			});
 
 			// Reset ClientSocket.
