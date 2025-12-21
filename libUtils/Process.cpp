@@ -36,7 +36,7 @@ int GetProcessList(std::vector<kinfo_proc>& ProcessList)
 int GetProcInfo(int pid, kinfo_proc* out)
 {
 	size_t length = sizeof(kinfo_proc);
-	static int name[] = { CTL_KERN, KERN_PROC, KERN_PROC_PID, pid };
+	int name[] = { CTL_KERN, KERN_PROC, KERN_PROC_PID, pid };
 
 	// Retrive the processes.
 	if (sysctl(name, 4, out, &length, nullptr, 0) < 0)
