@@ -3,7 +3,7 @@
 #include <GoldHEN.h>
 #include <FusionDriver.h>
 #include <KernelExt.h>
-#include <ShellCode.h>
+#include <RemoteSprx.h>
 
 #include "SystemInterface.h"
 
