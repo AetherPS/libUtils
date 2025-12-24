@@ -22,16 +22,17 @@ size_t FileSystem::GetSize(const std::string filePath)
 	{
 		Logger::Error("%s: Failed to open file %s: %d %08X\n",
 			__FUNCTION__, filePath.c_str(), fd, sceKernelError(*__error()));
-		return 0;
+		return fd;
 	}
 
 	SceKernelStat stat;
-	if (sceKernelFstat(fd, &stat) != 0)
+	auto res = sceKernelFstat(fd, &stat);
+	if (res != 0)
 	{
 		Logger::Error("%s: Failed to stat file %s: %08X\n",
 			__FUNCTION__, filePath.c_str(), sceKernelError(*__error()));
 		sceKernelClose(fd);
-		return 0;
+		return res;
 	}
 
 	sceKernelClose(fd);
