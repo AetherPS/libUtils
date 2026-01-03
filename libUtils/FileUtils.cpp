@@ -70,6 +70,66 @@ int MountLargeFs(const char* device, const char* mountpoint, const char* fstype,
 	return nmount(iov, iovlen, flags);
 }
 
+int MountTmpfs(const char* mountpoint)
+{
+	struct iovec* iov = NULL;
+	int iovlen = 0;
+
+	BuildIovec(&iov, &iovlen, "fstype", "tmpfs", -1);
+	BuildIovec(&iov, &iovlen, "fspath", mountpoint, -1);
+	BuildIovec(&iov, &iovlen, "from", "tmpfs", -1);
+
+	return nmount(iov, iovlen, 0);
+}
+
+int MountNullfs(const char* source, const char* target)
+{
+	struct iovec* iov = NULL;
+	int iovlen = 0;
+
+	BuildIovec(&iov, &iovlen, "fstype", "nullfs", -1);
+	BuildIovec(&iov, &iovlen, "fspath", target, -1);
+	BuildIovec(&iov, &iovlen, "from", source, -1);
+
+	return nmount(iov, iovlen, 0);
+}
+
+int MountAll(const char* dst, const char* src)
+{
+	int fd = sceKernelOpen(src, O_RDONLY | O_DIRECTORY, 0);
+	if (fd < 0) return -1;
+
+	char buf[2048];
+	int nread;
+
+	while ((nread = sceKernelGetdents(fd, buf, sizeof(buf))) > 0)
+	{
+		struct dirent* entry;
+		for (int pos = 0; pos < nread;)
+		{
+			entry = (struct dirent*)(buf + pos);
+
+			if (entry->d_name[0] != '.')
+			{
+				char srcPath[512], dstPath[512];
+				snprintf(srcPath, sizeof(srcPath), "%s/%s", src, entry->d_name);
+				snprintf(dstPath, sizeof(dstPath), "%s/%s", dst, entry->d_name);
+
+				if (entry->d_type == DT_DIR)
+				{
+					sceKernelMkdir(dstPath, 0777);
+					MountNullfs(srcPath, dstPath);
+				}
+			}
+
+			pos += entry->d_reclen;
+		}
+	}
+
+	sceKernelClose(fd);
+	return 0;
+}
+
 int RemountReadWrite(const char* device, const char* dir)
 {
 	return MountLargeFs(device, dir, "exfatfs", "511", MNT_UPDATE);

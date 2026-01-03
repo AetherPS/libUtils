@@ -8,5 +8,8 @@ int nmount(struct iovec* iov, uint32_t niov, int flags);
 int mount(const char* type, const char* dir, int flags, void* data);
 int unmount(const char* dir, int flags);
 int MountLargeFs(const char* device, const char* mountpoint, const char* fstype, const char* mode, unsigned int flags);
+int MountTmpfs(const char* mountpoint);
+int MountNullfs(const char* source, const char* target);
+int MountAll(const char* dst, const char* src);
 int RemountReadWrite(const char* device, const char* dir);
 void DisableUpdates();
