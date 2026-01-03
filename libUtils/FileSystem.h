@@ -5,8 +5,8 @@ class FileSystem
 public:
 	static bool Exists(const std::string filePath);
 	static size_t GetSize(const std::string filePath);
-	static bool Rename(std::string from, std::string to);
-	static bool Remove(std::string filePath);
+	static int Rename(std::string from, std::string to);
+	static int Remove(std::string filePath);
 	static bool IsDirectoryEmpty(const std::string& dirPath);
 	static std::vector<SceKernelDirent> GetDentList(const std::string& basePath);
 	static bool MakeDir(const char* Dir, ...);

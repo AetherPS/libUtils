@@ -39,7 +39,7 @@ size_t FileSystem::GetSize(const std::string filePath)
 	return static_cast<size_t>(stat.st_size);
 }
 
-bool FileSystem::Rename(std::string from, std::string to)
+int FileSystem::Rename(std::string from, std::string to)
 {
 	int res = sceKernelRename(from.c_str(), to.c_str());
 
@@ -47,22 +47,23 @@ bool FileSystem::Rename(std::string from, std::string to)
 	{
 		Logger::Error("%s Failed to rename file %s to %s: ret=%d errno=%d sceKernelError=%08X\n",
 			__FUNCTION__, from.c_str(), to.c_str(), res, *__error(), sceKernelError(*__error()));
-		return false;
+		return res;
 	}
 
-	return true;
+	return 0;
 }
-bool FileSystem::Remove(std::string filePath)
+
+int FileSystem::Remove(std::string filePath)
 {
 	int res = sceKernelUnlink(filePath.c_str());
 	if (res != 0)
 	{
 		Logger::Error("%s Failed to remove file %s: ret=%d errno=%d sceKernelError=%08X\n",
 			__FUNCTION__, filePath.c_str(), res, *__error(), sceKernelError(*__error()));
-		return false;
+		return res;
 	}
 
-	return true;
+	return 0;
 }
 
 bool FileSystem::IsDirectoryEmpty(const std::string& dirPath)
