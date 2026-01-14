@@ -8,7 +8,7 @@ void Detour32::Create(void* address, void* destination)
 {
 	if (address == 0 || destination == nullptr)
 	{
-		Logger::Error("[Detour32] create: \"address\" or \"destination\" NULL (%llX -> %llX)\n", address, destination);
+		Logger::Error("[Detour32] create: \"address\" or \"destination\" NULL (%llX -> %llX)", address, destination);
 		return;
 	}
 
@@ -23,12 +23,12 @@ void Detour32::Create(void* address, void* destination)
 
 		if (hs.flags & F_ERROR)
 		{
-			Logger::Error("[Detour32] HDE has run into an error dissasembling %llX!\n", ptr);
+			Logger::Error("[Detour32] HDE has run into an error dissasembling %llX!", ptr);
 			return;
 		}
 	}
 
-	Logger::Info("[Detour32] create: instructionLength = %i\n", instructionLength);
+	Logger::Info("[Detour32] create: instructionLength = %i", instructionLength);
 
 	Address = address;
 
@@ -38,7 +38,7 @@ void Detour32::Create(void* address, void* destination)
 	memcpy(OriginalBytes.get(), address, OriginalSize);
 
 #ifdef _DEBUG
-	Logger::Info("[Detour32] create: original bytes saved\n");
+	Logger::Info("[Detour32] create: original bytes saved");
 	hexdump(OriginalBytes.get(), OriginalSize, true);
 #endif
 
@@ -46,28 +46,28 @@ void Detour32::Create(void* address, void* destination)
 	auto res = sceKernelMmap((void*)address, JUMP_64SIZE, SCE_KERNEL_PROT_CPU_ALL, 0x1000 | 0x2, -1, 0, (void**)&TrampolinePtr);
 	if (res < 0 || TrampolinePtr == nullptr)
 	{
-		Logger::Error("[Detour32] create: an error has occurred allocating trampoline: %X, %llX\n", res, TrampolinePtr);
+		Logger::Error("[Detour32] create: an error has occurred allocating trampoline: %X, %llX", res, TrampolinePtr);
 		return;
 	}
 
 	// Make sure we can make the jump.
 	if (!IsRelativelyClose((void*)((uint64_t)address + JUMP_32SIZE), TrampolinePtr))
 	{
-		Logger::Error("[Detour32] create: Trampoline is not relatively close we can not write a jump 32.\n");
+		Logger::Error("[Detour32] create: Trampoline is not relatively close we can not write a jump 32.");
 
 		sceKernelMunmap(TrampolinePtr, JUMP_64SIZE);
 
 		return;
 	}
 
-	Logger::Info("[Detour32] create: writing trampoline jumps\n");
+	Logger::Info("[Detour32] create: writing trampoline jumps");
 
 	// allocate the stub
 	StubSize = instructionLength + JUMP_64SIZE;
 	res = sceKernelMmap(0, StubSize, SCE_KERNEL_PROT_CPU_ALL, 0x1000 | 0x2, -1, 0, (void**)&StubPtr);
 	if (res < 0 || StubPtr == nullptr)
 	{
-		Logger::Error("[Detour32] create: sceKernelMmap returned error = %X\n", res);
+		Logger::Error("[Detour32] create: sceKernelMmap returned error = %X", res);
 		return;
 	}
 
@@ -78,23 +78,23 @@ void Detour32::Create(void* address, void* destination)
 	auto stubJump = reinterpret_cast<uint64_t>(StubPtr) + instructionLength;
 	auto stubReturn = reinterpret_cast<uint64_t>(Address) + instructionLength;
 
-	Logger::Info("[Detour32] create: writing detour jumps\n");
+	Logger::Info("[Detour32] create: writing detour jumps");
 
 	WriteJump64(reinterpret_cast<void*>(stubJump), reinterpret_cast<void*>(stubReturn));
 	WriteJump64(TrampolinePtr, destination);
 	WriteJump32(address, TrampolinePtr);
 
 #ifdef _DEBUG
-	Logger::Info("[Detour32] create: jump set\n");
+	Logger::Info("[Detour32] create: jump set");
 
-	Logger::Info("[Detour32] Trampoline:\n");
+	Logger::Info("[Detour32] Trampoline:");
 	hexdump(TrampolinePtr, JUMP_64SIZE, true);
 
-	Logger::Info("[Detour32] Detour:\n");
+	Logger::Info("[Detour32] Detour:");
 	hexdump(address, JUMP_32SIZE, true);
 #endif
 
-	Logger::Success("[Detour32] Detour written from 0x%llX -> 0x%llX\n", address, destination);
+	Logger::Success("[Detour32] Detour written from 0x%llX -> 0x%llX", address, destination);
 	DetourSet = true;
 }
 
@@ -102,18 +102,18 @@ void Detour32::Restore()
 {
 	if (DetourSet)
 	{
-		Logger::Info("[Detour32] Restoring original function bytes.\n");
+		Logger::Info("[Detour32] Restoring original function bytes.");
 		sceKernelMprotect(reinterpret_cast<void*>(Address), OriginalSize, SCE_KERNEL_PROT_CPU_ALL);
 		memcpy(reinterpret_cast<void*>(Address), OriginalBytes.get(), OriginalSize);
 
 		sceKernelMunmap(TrampolinePtr, JUMP_64SIZE);
 		sceKernelMunmap(StubPtr, StubSize);
 
-		Logger::Success("[Detour32] Detour Removed.\n");
+		Logger::Success("[Detour32] Detour Removed.");
 		DetourSet = false;
 	}
 	else
 	{
-		Logger::Warn("[Detour32] restore: cannot restore detour that was not set!\n");
+		Logger::Warn("[Detour32] restore: cannot restore detour that was not set!");
 	}
 }

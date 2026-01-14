@@ -7,7 +7,7 @@ void Detour64::Create(void* address, void* destination)
 {
 	if (address == 0 || destination == nullptr)
 	{
-		Logger::Error("[Detour64] create: \"address\" or \"destination\" NULL (%llX -> %llX)\n", address, destination);
+		Logger::Error("[Detour64] create: \"address\" or \"destination\" NULL (%llX -> %llX)", address, destination);
 		return;
 	}
 
@@ -22,12 +22,12 @@ void Detour64::Create(void* address, void* destination)
 
 		if (hs.flags & F_ERROR)
 		{
-			Logger::Error("[Detour64] HDE has run into an error dissasembling %llX!\n", ptr);
+			Logger::Error("[Detour64] HDE has run into an error dissasembling %llX!", ptr);
 			return;
 		}
 	}
 
-	Logger::Info("[Detour64] create: instructionLength = %i\n", instructionLength);
+	Logger::Info("[Detour64] create: instructionLength = %i", instructionLength);
 
 	Address = address;
 
@@ -37,7 +37,7 @@ void Detour64::Create(void* address, void* destination)
 	memcpy(OriginalBytes.get(), address, OriginalSize);
 
 #ifdef _DEBUG
-	Logger::Info("[Detour64] create: original bytes saved\n");
+	Logger::Info("[Detour64] create: original bytes saved");
 	hexdump(OriginalBytes.get(), OriginalSize, true);
 #endif
 
@@ -46,7 +46,7 @@ void Detour64::Create(void* address, void* destination)
 	auto res = sceKernelMmap(0, StubSize, SCE_KERNEL_PROT_CPU_ALL, 0x1000 | 0x2, -1, 0, &StubPtr);
 	if (res < 0 || StubPtr == nullptr)
 	{
-		Logger::Error("[Detour64] create: sceKernelMmap returned error = %X\n", res);
+		Logger::Error("[Detour64] create: sceKernelMmap returned error = %X", res);
 		return;
 	}
 
@@ -57,21 +57,21 @@ void Detour64::Create(void* address, void* destination)
 	auto stub_jump = reinterpret_cast<uint64_t>(StubPtr) + instructionLength;
 	auto stub_return = reinterpret_cast<uint64_t>(Address) + instructionLength;
 
-	Logger::Info("[Detour64] create: writing detour jumps\n");
+	Logger::Info("[Detour64] create: writing detour jumps");
 
 	WriteJump64(reinterpret_cast<void*>(stub_jump), reinterpret_cast<void*>(stub_return));
 	WriteJump64(Address, destination);
 
 #ifdef _DEBUG
-	Logger::Info("[Detour64] create: detour set\n");
+	Logger::Info("[Detour64] create: detour set");
 
-	Logger::Info("[Detour64] Stub:\n");
+	Logger::Info("[Detour64] Stub:");
 	hexdump(StubPtr, StubSize, true);
 
-	Logger::Info("[Detour64] Detour:\n");
+	Logger::Info("[Detour64] Detour:");
 	hexdump(address, JUMP_64SIZE, true);
 #endif
-	Logger::Success("[Detour64] Detour written from 0x%llX -> 0x%llX\n", address, destination);
+	Logger::Success("[Detour64] Detour written from 0x%llX -> 0x%llX", address, destination);
 	DetourSet = true;
 }
 
@@ -79,7 +79,7 @@ void Detour64::Restore()
 {
 	if (DetourSet)
 	{
-		Logger::Info("[Detour64] Restoring original function bytes.\n");
+		Logger::Info("[Detour64] Restoring original function bytes.");
 		sceKernelMprotect(reinterpret_cast<void*>(Address), OriginalSize, SCE_KERNEL_PROT_CPU_ALL);
 		memcpy(reinterpret_cast<void*>(Address), OriginalBytes.get(), OriginalSize);
 
@@ -90,11 +90,11 @@ void Detour64::Restore()
 		OriginalSize = 0;
 		Address = 0;
 
-		Logger::Success("[Detour64] Detour Removed.\n");
+		Logger::Success("[Detour64] Detour Removed.");
 		DetourSet = false;
 	}
 	else
 	{
-		Logger::Warn("[Detour64] restore: cannot restore detour that was not set!\n");
+		Logger::Warn("[Detour64] restore: cannot restore detour that was not set!");
 	}
 }
