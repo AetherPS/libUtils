@@ -7,6 +7,8 @@
 class BaseDetour
 {
 public:
+	void* StubPtr;
+
 	virtual void Create(void* address, void* destination) = 0;
 	virtual void Restore() {};
 
@@ -29,7 +31,6 @@ protected:
 	void WriteJump64(void* address, void* destination);
 	void WriteCall32(void* address, void* destination);
 
-	void* StubPtr;
 	size_t StubSize;
 	void* Address;
 	std::unique_ptr<uint8_t[]> OriginalBytes;

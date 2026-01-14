@@ -20,6 +20,11 @@ public:
 		return DetourList[name]->Invoke<result>(args...);
 	}
 
+	void* GetStub(std::string name)
+	{
+		return DetourList[name]->StubPtr;
+	}
+
 private:
 	std::map<std::string, BaseDetour*> DetourList;
 };
